@@ -6,22 +6,31 @@ export class CatalogService {
   constructor(repository: ICatalogRepository) {
     this._repository = repository;
   }
-  createProduct(data: Product): Promise<Product> {
-    throw new Error("Method not implemented.");
+  async createProduct(input: Product): Promise<Product> {
+    const data = await this._repository.create(input);
+    if (!data.id) {
+      throw new Error("unable to create product");
+    }
+    return data;
   }
-  updateProduct(data: Product): Promise<Product> {
-    throw new Error("Method not implemented.");
+  async updateProduct(input: Product): Promise<Product> {
+    const data = await this._repository.update(input);
+    return data;
   }
-  deleteProduct(id: number): void {
-    throw new Error("Method not implemented.");
+  async deleteProduct(id: number) {
+    const data = await this._repository.delete(id);
+    return data;
   }
-  getAllProducts(): Promise<Product[]> {
-    throw new Error("Method not implemented.");
+  async getAllProducts(): Promise<Product[]> {
+    const products = await this._repository.findAll();
+    return products;
   }
-  getProducts(limit: number, offset: number): Promise<Product[]> {
-    throw new Error("Method not implemented.");
+  async getProducts(limit: number, offset: number): Promise<Product[]> {
+    const products = await this._repository.find(limit, offset);
+    return products;
   }
-  getProductById(id: number): Promise<Product> {
-    throw new Error("Method not implemented.");
+  async getProductById(id: number): Promise<Product> {
+    const product = await this._repository.findById(id);
+    return product;
   }
 }
