@@ -104,22 +104,6 @@ describe("Catalog Routes", () => {
     });
   });
 
-  describe("GET /all-products", () => {
-    test("should get list all product successfully", async () => {
-      const random = faker.number.int({ min: 1, max: 100 });
-      const products = ProductFactory.buildList(random);
-      jest
-        .spyOn(catalogService, "getAllProducts")
-        .mockImplementationOnce(() => Promise.resolve(products));
-      const response = await request(app)
-        .get(`/all-products`)
-        .set("Accept", "application/json");
-      expect(response.status).toBe(201);
-      expect(response.body.length).toEqual(random);
-      expect(response.body).toEqual(products);
-    });
-  });
-
   describe("GET /products?limit=a-number&&offset=a-number", () => {
     test("should get list product by range successfully", async () => {
       const random = faker.number.int({ min: 1, max: 100 });

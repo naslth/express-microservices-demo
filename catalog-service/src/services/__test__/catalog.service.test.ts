@@ -87,31 +87,6 @@ describe("catalogService", () => {
     });
   });
 
-  describe("getAllProducts", () => {
-    test("should get all products", async () => {
-      const service = new CatalogService(repository);
-      const randomTotal = faker.number.int({ min: 10, max: 50 });
-      const products = ProductFactory.buildList(randomTotal);
-      jest
-        .spyOn(repository, "findAll")
-        .mockImplementationOnce(() => Promise.resolve(products));
-      const result = await service.getAllProducts();
-      expect(result.length).toEqual(randomTotal);
-      expect(result).toMatchObject(products);
-    });
-
-    test("should throw error with product does not exist", async () => {
-      const service = new CatalogService(repository);
-      jest
-        .spyOn(repository, "findAll")
-        .mockImplementationOnce(() =>
-          Promise.reject(new Error("product does not exist"))
-        );
-      await expect(service.getAllProducts()).rejects.toThrow(
-        "product does not exist"
-      );
-    });
-  });
 
   describe("getProducts", () => {
     test("should get products by offset and limit", async () => {

@@ -21,10 +21,6 @@ export class CatalogService {
     const data = await this._repository.delete(id);
     return data;
   }
-  async getAllProducts(): Promise<Product[]> {
-    const products = await this._repository.findAll();
-    return products;
-  }
   async getProducts(limit: number, offset: number): Promise<Product[]> {
     const products = await this._repository.find(limit, offset);
     return products;

@@ -65,26 +65,6 @@ catalogRouter.get(
   }
 );
 
-catalogRouter.get(
-  "/all-products",
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const data = await catalogService.getAllProducts();
-      // const { errors } = await RequestValidator(CreateProductRequest, data);
-      // data.forEach(async (product) => {
-      //   const { errors } = await RequestValidator(
-      //     CreateProductRequest,
-      //     product
-      //   );
-      //   if (errors) return res.status(400).json(errors);
-      // });
-      return res.status(201).json(data);
-    } catch (error) {
-      const err = error as Error;
-      return res.status(500).json(err.message);
-    }
-  }
-);
 
 catalogRouter.get(
   "/product/:id",
